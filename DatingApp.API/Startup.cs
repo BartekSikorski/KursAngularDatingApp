@@ -33,8 +33,8 @@ namespace DatingApp.API
         {
             services.AddDbContext<DataContext>(x=> x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")) );
             services.AddControllers();
-            services.AddCors();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddCors();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).
             AddJwtBearer(options => {
                 options.TokenValidationParameters = new TokenValidationParameters{
@@ -44,6 +44,7 @@ namespace DatingApp.API
                     ValidateAudience = false
                 };
             });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,11 +59,12 @@ namespace DatingApp.API
 
             app.UseRouting();
 
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseHttpsRedirection();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
