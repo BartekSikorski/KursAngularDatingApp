@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BsDropdownModule} from 'ngx-bootstrap/dropdown';
 // import { TabsModule } from 'ngx-bootstrap/tabs';
-import { BsDatepickerModule, TabsModule } from 'ngx-bootstrap';
+import { BsDatepickerModule, TabsModule, ButtonsModule, PaginationModule } from 'ngx-bootstrap';
 import { RouterModule } from '@angular/router';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgxGalleryModule } from 'ngx-gallery';
@@ -81,7 +81,9 @@ export class CustomHammerConfig extends HammerGestureConfig  {
          }
       }),
       FileUploadModule,
-      BsDatepickerModule.forRoot()
+      BsDatepickerModule.forRoot(),
+      ButtonsModule.forRoot(),
+      PaginationModule.forRoot(),
    ],
    providers: [
       AuthService,
